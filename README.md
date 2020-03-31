@@ -12,7 +12,7 @@ $ ffmpeg 'rtsp://<username>:<password>@192.168.50.60:554/realmonitor?channel=0&s
 av.AVError: [Errno 1094995529] Invalid data found when processing input: 'rtsp://<username>:<password>@192.168.50.60:554/realmonitor?channel=0&stream=0.sdp'
 ```
 
-The problem is that the `Transport` response header on `SETUP` requests in incorrectly formatted (according to section 12.39 of [RFC 2326][]).
+The problem is that the `Transport` response header on `SETUP` responses is incorrectly formatted (according to section 12.39 of [RFC 2326][]).
 
 [RFC 2326]: https://tools.ietf.org/html/rfc2326#page-58
 
