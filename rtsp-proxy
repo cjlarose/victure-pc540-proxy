@@ -1,12 +1,13 @@
 #!/bin/bash
 
 SERVER_LISTEN_PORT=${SERVER_LISTEN_PORT:-554}
+SERVER_LISTEN_ADDRESS=${SERVER_LISTEN_ADDRESS:-0.0.0.0}
 DESTINATION=${DESTINATION:?"missing DESTINATION address:port"}
 REPLACE_COMMAND="gsed -u '"'s/,ssrc=/\\;ssrc=/'"'"
 
 start_server () {
   local listen_port=$1
-  socat -d -d TCP-LISTEN:"$listen_port",bind=127.0.0.1,fork SYSTEM:"$0"' worker'
+  socat -d -d TCP-LISTEN:"$listen_port",bind="$SERVER_LISTEN_ADDRESS",fork SYSTEM:"$0"' worker'
 }
 
 worker_cleanup () {
