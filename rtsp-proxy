@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SERVER_LISTEN_PORT=${SERVER_LISTEN_PORT:-8081}
+SERVER_LISTEN_PORT=${SERVER_LISTEN_PORT:-554}
 DESTINATION=${DESTINATION:?"missing DESTINATION address:port"}
 REPLACE_COMMAND="gsed -u '"'s/,ssrc=/\\;ssrc=/'"'"
 
