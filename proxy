@@ -1,0 +1,37 @@
+#!/bin/bash
+
+SERVER_LISTEN_PORT=${SERVER_LISTEN_PORT:-8081}
+DESTINATION=${DESTINATION:?"missing DESTINATION address:port"}
+REPLACE_COMMAND="gsed -u '"'s/,ssrc=/\\;ssrc=/'"'"
+
+start_server () {
+  local listen_port=$1
+  socat -d -d TCP-LISTEN:"$listen_port",bind=127.0.0.1,fork SYSTEM:"$0"' worker'
+}
+
+worker_cleanup () {
+  rm -rf "$TMP"
+}
+
+worker () {
+  TMP=$(mktemp -d)
+  trap worker_cleanup EXIT
+
+  local requests=$TMP/requests
+  local raw_responses=$TMP/raw_responses
+  local modified_responses=$TMP/modified_responses
+
+  mkfifo "$requests" "$raw_responses" "$modified_responses"
+
+  cat > "$requests" < /dev/stdin &
+  socat -d -d PIPE:"$requests"'!!'PIPE:"$raw_responses",unlink-close TCP:"$DESTINATION" &
+  socat -d -d PIPE:"$raw_responses"'!!'PIPE:"$modified_responses",unlink-close SYSTEM:"$REPLACE_COMMAND" &
+  cat "$modified_responses"
+}
+
+if [ "$1" == "worker" ]; then
+  worker
+else
+  echo "Starting server on port $SERVER_LISTEN_PORT"
+  start_server "$SERVER_LISTEN_PORT" "$DESTINATION"
+fi
