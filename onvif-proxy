@@ -25,8 +25,8 @@ worker () {
 
   mkfifo "$requests" "$raw_responses" "$modified_responses"
 
-  socat -d -d PIPE:"$requests"'!!'PIPE:"$raw_responses",unlink-close TCP:"$CAMERA_IP:$CAMERA_PORT" &
-  socat -d -d PIPE:"$raw_responses"'!!'PIPE:"$modified_responses",unlink-close SYSTEM:"$0 rewrite" &
+  socat -d -d PIPE:"$requests"'!!'PIPE:"$raw_responses" TCP:"$CAMERA_IP:$CAMERA_PORT" &
+  socat -d -d PIPE:"$raw_responses"'!!'PIPE:"$modified_responses" SYSTEM:"$0 rewrite" &
   cat > "$requests" &
   cat "$modified_responses"
 }
