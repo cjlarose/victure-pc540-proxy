@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  rtsp:
+  rtsp_proxy:
     build: .
     ports:
       - "554:554"
