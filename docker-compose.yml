@@ -1,7 +1,9 @@
 version: "3.7"
 services:
   rtsp_proxy:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile-rtsp
     ports:
       - "554:554"
     environment:
