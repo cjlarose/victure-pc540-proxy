@@ -24,9 +24,9 @@ worker () {
 
   mkfifo "$requests" "$raw_responses" "$modified_responses"
 
-  cat > "$requests" < /dev/stdin &
   socat -d -d PIPE:"$requests"'!!'PIPE:"$raw_responses",unlink-close TCP:"$DESTINATION" &
   socat -d -d PIPE:"$raw_responses"'!!'PIPE:"$modified_responses",unlink-close SYSTEM:"$REPLACE_COMMAND" &
+  cat > "$requests" &
   cat "$modified_responses"
 }
 
