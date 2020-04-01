@@ -8,7 +8,7 @@ CAMERA_PORT=${CAMERA_PORT:-554}
 
 start_server () {
   local listen_port=$1
-  socat -d -d TCP-LISTEN:"$listen_port",bind="$SERVER_LISTEN_HOST",fork SYSTEM:"$0"' worker'
+  socat -d -d TCP-LISTEN:"$listen_port",bind="$SERVER_LISTEN_HOST",fork SYSTEM:"$0 worker"
 }
 
 worker_cleanup () {
