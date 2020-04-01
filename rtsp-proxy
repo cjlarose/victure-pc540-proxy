@@ -39,6 +39,6 @@ if [ "$1" == "worker" ]; then
 elif [ "$1" == "rewrite" ]; then
   rewrite
 else
-  echo "Starting server on port $SERVER_LISTEN_PORT"
+  echo "Starting rtsp server on port $SERVER_LISTEN_PORT"
   start_server "$SERVER_LISTEN_PORT"
 fi
