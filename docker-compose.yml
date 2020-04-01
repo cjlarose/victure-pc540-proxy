@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  rtsp:
+    build: .
+    ports:
+      - "554:554"
+    environment:
+      DESTINATION: "${CAMERA_IP:?missing environment variable CAMERA_IP}:554"
+  onvif_proxy:
+    image: alpine/socat
+    ports:
+      - "8080:8080"
+    command:
+      - "-d"
+      - "-d"
+      - "TCP-LISTEN:8080,fork"
+      - "TCP:${CAMERA_IP:?missing environment variable CAMERA_IP}:8080"
