@@ -1,14 +1,14 @@
 #!/bin/bash
 
 SERVER_LISTEN_PORT=${SERVER_LISTEN_PORT:-554}
-SERVER_LISTEN_ADDRESS=${SERVER_LISTEN_ADDRESS:-0.0.0.0}
+SERVER_LISTEN_HOST=${SERVER_LISTEN_HOST:-0.0.0.0}
 ADVERTISED_PROXY_HOST=${ADVERTISED_PROXY_HOST:?"missing ADVERTISED_PROXY_HOST"}
 CAMERA_IP=${CAMERA_IP:?"missing CAMERA_IP"}
 CAMERA_PORT=${CAMERA_PORT:-554}
 
 start_server () {
   local listen_port=$1
-  socat -d -d TCP-LISTEN:"$listen_port",bind="$SERVER_LISTEN_ADDRESS",fork SYSTEM:"$0"' worker'
+  socat -d -d TCP-LISTEN:"$listen_port",bind="$SERVER_LISTEN_HOST",fork SYSTEM:"$0"' worker'
 }
 
 worker_cleanup () {
