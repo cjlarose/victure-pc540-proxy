@@ -9,11 +9,11 @@ services:
     environment:
       DESTINATION: "${CAMERA_IP:?missing environment variable CAMERA_IP}:554"
   onvif_proxy:
-    image: alpine/socat
+    build:
+      context: .
+      dockerfile: Dockerfile-onvif
     ports:
       - "8080:8080"
-    command:
-      - "-d"
-      - "-d"
-      - "TCP-LISTEN:8080,fork"
-      - "TCP:${CAMERA_IP:?missing environment variable CAMERA_IP}:8080"
+    environment:
+      CAMERA_IP: "${CAMERA_IP:?missing environment variable CAMERA_IP}"
+      ADVERTISED_PROXY_HOST: "${ADVERTISED_PROXY_HOST:?missing environment variable ADVERTISED_PROXY_HOST}"
