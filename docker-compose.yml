@@ -7,7 +7,7 @@ services:
     ports:
       - "554:554"
     environment:
-      DESTINATION: "${CAMERA_IP:?missing environment variable CAMERA_IP}:554"
+      CAMERA_IP: "${CAMERA_IP:?missing environment variable CAMERA_IP}"
   onvif_proxy:
     build:
       context: .
