@@ -27,8 +27,7 @@ worker () {
 
   socat -d -d PIPE:"$requests"'!!'PIPE:"$raw_responses" TCP:"$CAMERA_IP:$CAMERA_PORT" &
   socat -d -d PIPE:"$raw_responses"'!!'PIPE:"$modified_responses" SYSTEM:"$0 rewrite" &
-  cat > "$requests" &
-  cat "$modified_responses"
+  socat -d -d - PIPE:"$modified_responses"',nonblock!!'PIPE:"$requests"
 }
 
 rewrite () {
