@@ -31,7 +31,14 @@ worker () {
 }
 
 rewrite () {
-  exec sed -u '/^Transport:/s/,ssrc=/\;ssrc=/;s/'"$CAMERA_IP"'/'"$ADVERTISED_PROXY_HOST"'/'
+  local script
+  IFS='' read -r -d '' script <<EOF
+    /^Transport:/ {
+      s/,ssrc=/\;ssrc=/
+      s/$CAMERA_IP/$ADVERTISED_PROXY_HOST/
+    }
+EOF
+  exec sed -u "$script"
 }
 
 if [ "$1" == "worker" ]; then
