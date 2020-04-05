@@ -1,11 +1,11 @@
-FROM debian:buster
+FROM node:12.16.1-buster
 
-RUN apt-get update && apt-get install -y \
-      socat \
-    && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
 
-ADD onvif-proxy /usr/local/bin/onvif-proxy
+ADD package.json package-lock.json ./
+RUN npm install
+ADD proxy.js proxy.js
 
 EXPOSE 8080
 
-CMD ["onvif-proxy"]
+CMD ["node", "proxy.js"]

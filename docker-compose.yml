@@ -16,4 +16,4 @@ services:
       - "8080:8080"
     environment:
       CAMERA_IP: "${CAMERA_IP:?missing environment variable CAMERA_IP}"
-      ADVERTISED_PROXY_HOST: "${ADVERTISED_PROXY_HOST:?missing environment variable ADVERTISED_PROXY_HOST}"
+      RTSP_PROXY_HOST: "${RTSP_PROXY_HOST:?missing environment variable RTSP_PROXY_HOST}"

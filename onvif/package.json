@@ -1,0 +1,22 @@
+{
+  "name": "victure-pc540-onvif-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cjlarose/victure-pc540-proxy.git"
+  },
+  "author": "Chris La Rose",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cjlarose/victure-pc540-proxy/issues"
+  },
+  "homepage": "https://github.com/cjlarose/victure-pc540-proxy#readme",
+  "dependencies": {
+    "http-proxy": "^1.18.0"
+  }
+}
