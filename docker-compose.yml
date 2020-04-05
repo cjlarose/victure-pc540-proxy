@@ -2,16 +2,16 @@ version: "3.7"
 services:
   rtsp_proxy:
     build:
-      context: .
-      dockerfile: Dockerfile-rtsp
+      context: rtsp
+      dockerfile: Dockerfile
     ports:
       - "554:554"
     environment:
       CAMERA_IP: "${CAMERA_IP:?missing environment variable CAMERA_IP}"
   onvif_proxy:
     build:
-      context: .
-      dockerfile: Dockerfile-onvif
+      context: onvif
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     environment:
