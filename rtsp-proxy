@@ -2,7 +2,6 @@
 
 SERVER_LISTEN_PORT=${SERVER_LISTEN_PORT:-554}
 SERVER_LISTEN_HOST=${SERVER_LISTEN_HOST:-0.0.0.0}
-ADVERTISED_PROXY_HOST=${ADVERTISED_PROXY_HOST:?"missing ADVERTISED_PROXY_HOST"}
 CAMERA_IP=${CAMERA_IP:?"missing CAMERA_IP"}
 CAMERA_PORT=${CAMERA_PORT:-554}
 
@@ -35,7 +34,7 @@ rewrite () {
   IFS='' read -r -d '' script <<EOF
     /^Transport:/ {
       s/,ssrc=/\;ssrc=/
-      s/$CAMERA_IP/$ADVERTISED_PROXY_HOST/
+      s/;source[^\;]\+//
     }
 EOF
   exec sed -u "$script"
