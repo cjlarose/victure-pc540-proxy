@@ -21,7 +21,7 @@ function rewriteResponseBody(proxyRequestHostHeader, responseBody) {
   const rtspPatten = new RegExp(escapeRegExp(`rtsp://${CAMERA_IP}:554`), 'g');
   return responseBody
     .replace(httpPattern, `http://${proxyRequestHostHeader}`)
-    .replace(rtspPatten, `http://${RTSP_PROXY_HOST}:554`);
+    .replace(rtspPatten, `rtsp://${RTSP_PROXY_HOST}:554`);
 }
 
 proxy.on('proxyRes', function (proxyRes, req, res) {
