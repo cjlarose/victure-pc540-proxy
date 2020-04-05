@@ -31,7 +31,6 @@ worker () {
 }
 
 rewrite () {
-  echo "advertised host $ADVERTISED_PROXY_HOST" >&2
   exec sed -u "s/$CAMERA_IP/$ADVERTISED_PROXY_HOST/g"
 }
 
