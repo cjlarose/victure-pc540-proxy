@@ -1,10 +1,6 @@
-FROM debian:buster
+FROM node:12.16.1-buster
 
-RUN apt-get update && apt-get install -y \
-      socat \
-    && rm -rf /var/lib/apt/lists/*
-
-ADD rtsp-proxy /usr/local/bin/rtsp-proxy
+WORKDIR /app
 
 EXPOSE 554
 
