@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/cjlarose/victure-pc540-proxy#readme",
   "dependencies": {
-    "http-proxy": "^1.18.0"
+    "http-proxy": "^1.18.1"
   }
 }
